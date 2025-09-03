@@ -7,7 +7,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/PHATSAWUT-DG/simple-express-app'
+                    url: 'https://github.com/PHATSAWUT-DG/simple-express-app.git'
             }
         }
         stage('Build') {
