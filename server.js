@@ -1,38 +1,22 @@
-const express = require("express");
-const mysql = require("mysql");
+// 1. ใช้ let แทน const (Code Smell)
+let port = 3000;
 
-const app = express();
-const port = 4000;
+// 2. ฟังก์ชันที่ซ้ำซ้อนและไม่มีความหมาย (Code Smell)
+function uselessFunction() {
+    let result = 0;
+    for (let i = 0; i < 10; i++) {
+        result += i;
+    }
+    return result;
+}
 
-// MySQL database connection configuration
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "username", // แทนที่ด้วยชื่อผู้ใช้ MySQL ของคุณ
-  password: "password", // แทนที่ด้วยรหัสผ่าน MySQL ของคุณ
-  database: "database_name" // แทนที่ด้วยชื่อฐานข้อมูลที่คุณต้องการเชื่อมต่อ
-});
+// เรียกใช้ฟังก์ชันโดยไม่จำเป็น
+uselessFunction();
 
-// Connect to MySQL database
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL database: ' + err.stack);
-    return;
-  }
-  console.log('Connected to MySQL database as id ' + connection.threadId);
-});
+// 3. ตัวแปรที่ไม่ได้ใช้ (Code Smell)
+let unusedVariable = "I am not used anywhere";
 
-// Middleware to log request method and URL
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
-
-// Route handling
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.get("/about", (req, res) => {
-  res.send("About page");
-});
-
+// 4. เงื่อนไขที่ไม่มีประโยชน์ (Bug หรือ Logic Smell)
+if (true) {
+    console.log("This always runs");
+}
